@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+        <RootNamespace>Auth</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="9.0.0" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+        <PackageReference Include="BCrypt.Net-Next" Version="3.1.3" />
+        <PackageReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="4.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="ArchiveTest\bin\Debug\netcoreapp2.2\ArchiveTest.deps.json" />
+        <_ContentIncludedByDefault Remove="ArchiveTest\bin\Debug\netcoreapp2.2\ArchiveTest.runtimeconfig.dev.json" />
+        <_ContentIncludedByDefault Remove="ArchiveTest\bin\Debug\netcoreapp2.2\ArchiveTest.runtimeconfig.json" />
+        <_ContentIncludedByDefault Remove="ArchiveTest\obj\ArchiveTest.csproj.nuget.dgspec.json" />
+        <_ContentIncludedByDefault Remove="ArchiveTest\obj\project.assets.json" />
+        <_ContentIncludedByDefault Remove="ArchiveTest\obj\project.packagespec.json" />
+        <_ContentIncludedByDefault Remove="wwwroot\Documents\codes132156136456016191.csv" />
+        <_ContentIncludedByDefault Remove="wwwroot\Documents\DataText132156136456016878.txt" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="wwwroot" />
+    </ItemGroup>
+
+</Project>
