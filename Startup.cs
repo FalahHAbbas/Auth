@@ -46,6 +46,7 @@ namespace Auth {
                     {"Bearer", Enumerable.Empty<string>()}
                 });
             });
+            AuthHelper.InitRoles();
 
             services.AddAutoMapper(typeof(Startup));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
@@ -67,7 +68,7 @@ namespace Auth {
                         .AllowCredentials());
             });
             services.AddAuthorization(options =>
-                options.AddPolicy("Main", p => HasPrivilegeRequirement.Of(p)));
+                options.AddPolicy("Main", HasPrivilegeRequirement.Of));
             services.AddScoped<IAuthorizationHandler, HasPrivilegeHandler>();
 
             services.AddMvc().AddJsonOptions(options => {

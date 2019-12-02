@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Auth.Models;
 using Auth.Repositories;
@@ -28,10 +29,10 @@ namespace Auth.Configs {
 
             if (context.Resource is AuthorizationFilterContext resource) {
                 var privilege = new Privilege {
-                    Template =
-                        resource.HttpContext.Request.Path.Value
-                            .Replace("/api/" + resource.RouteData.Values["controller"] + "/", "")
-                            .Split("/")[0],
+                    Template = resource.HttpContext.Request.Path.Value
+                    // .Replace("/api/" + resource.RouteData.Values["controller"] + "/", "")
+                    // .Split("/")[0]
+                    ,
                     MethodType = resource.HttpContext.Request.Method,
                     CalssName = resource.RouteData.Values["controller"] + "Controller",
                     MethodName = resource.RouteData.Values["action"].ToString()
@@ -39,19 +40,16 @@ namespace Auth.Configs {
 
 
                 var userPrivileges = context.User.FindFirst(c => c.Type == "Privileges").Value
-                    .Split(";").ToList();
-                if (userPrivileges.Contains(privilege.Name)) {
+                    .Split(";").Select(p => Regex.Replace(p, @"{.*}", "")).ToList();
+                if (userPrivileges.Any(up => privilege.Template.StartsWith(up))) {
                     context.Succeed(requirement);
                     return;
                 }
 
                 var userRoles = context.User.FindFirstValue("Roles").Split(";").ToList();
-                var role = await _repositoryWrapper.RoleRepository
-                    .GetRaw(p => userRoles.Contains(p.Name))
-                    .Where(p => p.Privileges.Any(pr => pr.Privilege.Name == privilege.Name))
-                    .FirstOrDefaultAsync();
-
-                if (role != null) {
+                if (await _repositoryWrapper.RoleRepository.GetRaw(p => userRoles.Contains(p.Name))
+                        .Where(p => p.Privileges.Any(pr => pr.Privilege.Name == privilege.Name))
+                        .FirstOrDefaultAsync() != null) {
                     context.Succeed(requirement);
                 }
             }

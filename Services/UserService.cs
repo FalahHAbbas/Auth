@@ -65,7 +65,7 @@ namespace Auth.Services
                 new Claim("Username", user.Username),
                 new Claim("Name", user.Name),
                 new Claim("id", user.Id.ToString()),
-                new Claim("Privileges", string.Join(";", user.Privileges.Select(p => p.Privilege.Name))),
+                new Claim("Privileges", string.Join(";", user.Privileges.Select(p => p.Privilege.Template))),
                 new Claim("Roles", string.Join(";", user.Roles.Select(p => p.Role.Name))),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
