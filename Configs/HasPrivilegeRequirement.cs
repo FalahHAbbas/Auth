@@ -34,7 +34,7 @@ namespace Auth.Configs {
                     // .Split("/")[0]
                     ,
                     MethodType = resource.HttpContext.Request.Method,
-                    CalssName = resource.RouteData.Values["controller"] + "Controller",
+                    ClassName = resource.RouteData.Values["controller"] + "Controller",
                     MethodName = resource.RouteData.Values["action"].ToString()
                 };
 

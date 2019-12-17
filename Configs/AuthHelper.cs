@@ -30,7 +30,7 @@ namespace Auth.Configs {
                 action.ContrllerPath.ForEach(path => {
                     privileges.AddRange(action.HttpMethods.Select(httpMethod => new Privilege {
                         Id = Guid.NewGuid(),
-                        CalssName = action.CalssName,
+                        ClassName = action.CalssName,
                         MethodName = action.MethodName,
                         Template =
                             "/"+path.Replace("[Controller]",

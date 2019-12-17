@@ -12,7 +12,7 @@ namespace Auth.Models
         public string Role { get; set; }
         public List<UserPrivilege> Privileges { get; set; }
         public List<UserRole> Roles { get; set; }
-
-        [NotMapped] public string Token { get; set; }
+        [NotMapped]
+        public string Token { get; set; }
     }
 }
